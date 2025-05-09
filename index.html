@@ -38,20 +38,20 @@
 
         if (data.success && data.data.listening_to_spotify) {
           const track = data.data.spotify;
-          container.innerHTML = \`
+          container.innerHTML = `
             <div class="bg-gray-800 text-left rounded-xl p-4 max-w-md w-full">
               <div class="flex items-center space-x-4">
-                <img src="\${track.album_art_url}" alt="Album Art" class="w-16 h-16 rounded" />
+                <img src="${track.album_art_url}" alt="Album Art" class="w-16 h-16 rounded" />
                 <div>
-                  <div class="font-semibold text-white">\${track.song}</div>
-                  <div class="text-gray-400 text-sm">\${track.artist}</div>
+                  <div class="font-semibold text-white">${track.song}</div>
+                  <div class="text-gray-400 text-sm">${track.artist}</div>
                 </div>
               </div>
               <div class="w-full bg-gray-700 h-1 mt-3 rounded">
-                <div class="bg-green-400 h-1 rounded" style="width: \${(track.timestamps.start && track.timestamps.end) ? ((Date.now() - track.timestamps.start) / (track.timestamps.end - track.timestamps.start) * 100).toFixed(1) : 0}%"></div>
+                <div class="bg-green-400 h-1 rounded" style="width: ${(track.timestamps.start && track.timestamps.end) ? ((Date.now() - track.timestamps.start) / (track.timestamps.end - track.timestamps.start) * 100).toFixed(1) : 0}%"></div>
               </div>
             </div>
-          \`;
+          `;
         } else {
           container.innerHTML = '<p class="text-gray-400">Not listening to anything on Spotify right now.</p>';
         }
