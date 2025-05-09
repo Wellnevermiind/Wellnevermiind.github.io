@@ -6,8 +6,8 @@
     <title>Willi | Portfolio</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   </head>
-  <body class="bg-[#0d0d0d] text-white font-sans overflow-hidden">
-    <div class="h-screen w-screen flex flex-col">
+  <body class="bg-gray-900 text-white font-sans">
+    <div class="min-h-screen flex flex-col">
       <header class="p-6 flex justify-between items-center">
         <h1 class="text-2xl font-bold">Willi</h1>
         <nav class="space-x-6 text-gray-300">
@@ -18,45 +18,17 @@
       <main class="flex-grow flex flex-col items-center justify-center text-center px-4">
         <h2 class="text-4xl font-bold mb-2">Hey, I am Willi.</h2>
         <p class="text-xl text-gray-400 mb-6">Student, programmer, and aspiring neuroscientist</p>
-        <div id="spotify-widget" class="mb-6 text-sm text-gray-300"></div>
-        <div class="flex space-x-6 mt-6 text-lg items-center">
-          <a href="https://github.com/Wellnevermiind" target="_blank" class="hover:underline">GitHub</a>
-          <a href="https://discordapp.com/users/286882831282733056" target="_blank" class="flex items-center hover:text-white">
-            <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20.317 4.369a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.078.037c-.211.375-.444.864-.608 1.248a18.28 18.28 0 00-5.487 0 12.67 12.67 0 00-.617-1.248.077.077 0 00-.078-.037 19.736 19.736 0 00-4.885 1.515.07.07 0 00-.032.027C2.2 9.129 1.67 13.742 2.083 18.313a.082.082 0 00.031.055 19.995 19.995 0 005.993 3.034.077.077 0 00.084-.027c.462-.63.873-1.295 1.226-1.993a.076.076 0 00-.041-.105c-.652-.25-1.27-.557-1.854-.915a.077.077 0 01-.008-.127c.125-.094.25-.191.368-.291a.077.077 0 01.07...
-            </svg>
-            Discord
-          </a>
+        <div class="mb-6">
+          <iframe src="https://lanyard-profile-readme.vercel.app/api/286882831282733056?theme=dark&animated=true&hideDiscrim=true&borderRadius=15px&idleMessage=Offline" height="150" frameborder="0"></iframe>
+        </div>
+        <div class="flex space-x-6 mt-6 text-lg">
+          <a href="https://github.com/Wellnevermiind" class="hover:underline" target="_blank">GitHub</a>
+          <a href="https://discordapp.com/users/286882831282733056" target="_blank" class="hover:underline">Discord</a>
         </div>
       </main>
+      <footer class="text-center p-6 text-sm text-gray-500">
+        Built with ❤️ using Tailwind CSS
+      </footer>
     </div>
-    <script>
-      async function loadSpotify() {
-        const res = await fetch("https://api.lanyard.rest/v1/users/286882831282733056");
-        const data = await res.json();
-        const container = document.getElementById("spotify-widget");
-
-        if (data.success && data.data.listening_to_spotify) {
-          const track = data.data.spotify;
-          container.innerHTML = `
-            <div class="bg-gray-800 text-left rounded-xl p-4 max-w-md w-full">
-              <div class="flex items-center space-x-4">
-                <img src="${track.album_art_url}" alt="Album Art" class="w-16 h-16 rounded" />
-                <div>
-                  <div class="font-semibold text-white">${track.song}</div>
-                  <div class="text-gray-400 text-sm">${track.artist}</div>
-                </div>
-              </div>
-              <div class="w-full bg-gray-700 h-1 mt-3 rounded">
-                <div class="bg-green-400 h-1 rounded" style="width: ${(track.timestamps.start && track.timestamps.end) ? ((Date.now() - track.timestamps.start) / (track.timestamps.end - track.timestamps.start) * 100).toFixed(1) : 0}%"></div>
-              </div>
-            </div>
-          `;
-        } else {
-          container.innerHTML = '<p class="text-gray-400">Not listening to anything on Spotify right now.</p>';
-        }
-      }
-      loadSpotify();
-    </script>
   </body>
 </html>
