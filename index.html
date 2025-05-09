@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,31 +8,62 @@
     <script>
       function toggleTheme() {
         document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+      }
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.classList.add('dark');
       }
     </script>
   </head>
-  <body class="bg-gray-900 text-white font-sans">
+  <body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white font-sans transition-colors duration-300">
     <header class="p-6 flex justify-between items-center">
       <h1 class="text-2xl font-bold">Willi</h1>
-      <nav class="space-x-6 text-gray-300">
+      <nav class="space-x-6 text-gray-500 dark:text-gray-300">
         <a href="about.html" class="hover:text-white">About Me</a>
         <a href="contact.html" class="hover:text-white">Contact</a>
-        <button onclick="toggleTheme()" class="bg-gray-700 px-3 py-1 rounded">🌓</button>
+        <button onclick="toggleTheme()" class="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded text-sm">🌓</button>
       </nav>
     </header>
     <main class="flex flex-col items-center justify-center min-h-screen text-center px-4">
       <h2 class="text-4xl font-bold mb-2">Hey, I am Willi.</h2>
-      <p class="text-xl text-gray-400 mb-6">Student, programmer, and aspiring neuroscientist</p>
-      <div class="mb-6">
-        <iframe src="https://lanyard-profile-readme.vercel.app/api/286882831282733056?theme=dark&animated=true&hideDiscrim=true&borderRadius=15px&idleMessage=Offline" height="150" frameborder="0"></iframe>
-      </div>
+      <p class="text-xl text-gray-600 dark:text-gray-400 mb-6">Student, programmer, and aspiring neuroscientist</p>
+      <div id="spotify-widget" class="mb-6 text-sm text-gray-300"></div>
       <div class="flex space-x-6 mt-6 text-lg">
         <a href="https://github.com/Wellnevermiind" target="_blank" class="hover:underline">GitHub</a>
         <span>Discord: nevermiind</span>
       </div>
     </main>
-    <footer class="text-center p-6 text-sm text-gray-500">
+    <footer class="text-center p-6 text-sm text-gray-400 dark:text-gray-500">
       Built with ❤️ using Tailwind CSS
     </footer>
+
+    <script>
+      async function loadSpotify() {
+        const res = await fetch("https://api.lanyard.rest/v1/users/286882831282733056");
+        const data = await res.json();
+        const container = document.getElementById("spotify-widget");
+
+        if (data.success && data.data.listening_to_spotify) {
+          const track = data.data.spotify;
+          container.innerHTML = \`
+            <div class="bg-gray-800 text-left rounded-xl p-4 max-w-md w-full">
+              <div class="flex items-center space-x-4">
+                <img src="\${track.album_art_url}" alt="Album Art" class="w-16 h-16 rounded" />
+                <div>
+                  <div class="font-semibold text-white">\${track.song}</div>
+                  <div class="text-gray-400 text-sm">\${track.artist}</div>
+                </div>
+              </div>
+              <div class="w-full bg-gray-700 h-1 mt-3 rounded">
+                <div class="bg-green-400 h-1 rounded" style="width: \${(track.timestamps.start && track.timestamps.end) ? ((Date.now() - track.timestamps.start) / (track.timestamps.end - track.timestamps.start) * 100).toFixed(1) : 0}%"></div>
+              </div>
+            </div>
+          \`;
+        } else {
+          container.innerHTML = '<p class="text-gray-400">Not listening to anything on Spotify right now.</p>';
+        }
+      }
+      loadSpotify();
+    </script>
   </body>
 </html>
