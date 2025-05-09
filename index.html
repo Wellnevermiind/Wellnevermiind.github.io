@@ -6,21 +6,26 @@
     <title>Willi | Portfolio</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script>
-      function toggleTheme() {
-        document.documentElement.classList.toggle('dark');
-        localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-      }
-      if (localStorage.getItem('theme') === 'dark') {
+      // Theme setup
+      const userPref = localStorage.getItem('theme');
+      const sysPref = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      if (userPref === 'dark' || (!userPref && sysPref === 'dark')) {
         document.documentElement.classList.add('dark');
+      }
+
+      function toggleTheme() {
+        const html = document.documentElement;
+        html.classList.toggle('dark');
+        localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
       }
     </script>
   </head>
-  <body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white font-sans transition-colors duration-300">
+  <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-sans overflow-hidden transition-colors duration-300">
     <header class="p-6 flex justify-between items-center">
       <h1 class="text-2xl font-bold">Willi</h1>
       <nav class="space-x-6 text-gray-500 dark:text-gray-300">
-        <a href="about.html" class="hover:text-white">About Me</a>
-        <a href="contact.html" class="hover:text-white">Contact</a>
+        <a href="about.html" class="hover:text-gray-800 dark:hover:text-white">About Me</a>
+        <a href="contact.html" class="hover:text-gray-800 dark:hover:text-white">Contact</a>
         <button onclick="toggleTheme()" class="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded text-sm">🌓</button>
       </nav>
     </header>
@@ -28,15 +33,16 @@
       <h2 class="text-4xl font-bold mb-2">Hey, I am Willi.</h2>
       <p class="text-xl text-gray-600 dark:text-gray-400 mb-6">Student, programmer, and aspiring neuroscientist</p>
       <div id="spotify-widget" class="mb-6 text-sm text-gray-300"></div>
-      <div class="flex space-x-6 mt-6 text-lg">
+      <div class="flex space-x-6 mt-6 text-lg items-center">
         <a href="https://github.com/Wellnevermiind" target="_blank" class="hover:underline">GitHub</a>
-        <span>Discord: nevermiind</span>
+        <a href="https://discordapp.com/users/286882831282733056" target="_blank" class="flex items-center hover:text-gray-800 dark:hover:text-white">
+          <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.317 4.369a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.078.037c-.211.375-.444.864-.608 1.248a18.28 18.28 0 00-5.487 0 12.67 12.67 0 00-.617-1.248.077.077 0 00-.078-.037 19.736 19.736 0 00-4.885 1.515.07.07 0 00-.032.027C2.2 9.129 1.67 13.742 2.083 18.313a.082.082 0 00.031.055 19.995 19.995 0 005.993 3.034.077.077 0 00.084-.027c.462-.63.873-1.295 1.226-1.993a.076.076 0 00-.041-.105c-.652-.25-1.27-.557-1.854-.915a.077.077 0 01-.008-.127c.125-.094.25-.191.368-.291a.077.077 0 01.079-.01c3.9 1.79 8.127 1.79 11.983 0a.076.076 0 01.08.009c.119.1.243.197.369.291a.077.077 0 01-.006.127 13.066 13.066 0 01-1.857.914.076.076 0 00-.04.106 13.124 13.124 0 001.225 1.993.076.076 0 00.084.028 20.038 20.038 0 005.994-3.034.076.076 0 00.03-.054c.5-5.177-.838-9.749-3.548-13.917a.062.062 0 00-.033-.028zM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.093 2.157 2.418 0 1.334-.955 2.419-2.157 2.419zm7.974 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.093 2.157 2.418 0 1.334-.947 2.419-2.157 2.419z"/>
+          </svg>
+          Discord
+        </a>
       </div>
     </main>
-    <footer class="text-center p-6 text-sm text-gray-400 dark:text-gray-500">
-      Built with ❤️ using Tailwind CSS
-    </footer>
-
     <script>
       async function loadSpotify() {
         const res = await fetch("https://api.lanyard.rest/v1/users/286882831282733056");
