@@ -1,3 +1,38 @@
-<!doctype html><html><head><meta name=generator content="Hugo 0.112.5"><title>nevermiind home page</title><style>body{display:flex;justify-content:center;align-items:center;height:100vh;flex-direction:column;background-color:#10151f;color:#fff;font-family:Arial,sans-serif}.circle{border-radius:50%;width:150px;height:150px}.social-icon{width:50px;height:50px;margin:0 10px}.socials{display:flex;justify-content:center;padding-top:20px}p{font-size:20px;text-align:center}</style></head><body><img src=/images/avatar.jpg alt="My avatar" class=circle><p>This site is under construction!</p><p>Check out my socials instead</p><div class=socials><a href=https://github.com/Wellnevermiind target=_blank><img src=/images/github.png alt=GitHub class=social-icon></a>
-<a href=https://twitter.com/well_nevermiind target=_blank><img src=/images/twitter.png alt=Twitter class=social-icon></a>
-<a href="https://discord.com/users/286882831282733056" target=_blank><img src=/images/discord.png alt=Discord class=social-icon></a></div></body></html>
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Willi | Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script>
+      function toggleTheme() {
+        document.documentElement.classList.toggle('dark');
+      }
+    </script>
+  </head>
+  <body class="bg-gray-900 text-white font-sans">
+    <header class="p-6 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Willi</h1>
+      <nav class="space-x-6 text-gray-300">
+        <a href="about.html" class="hover:text-white">About Me</a>
+        <a href="contact.html" class="hover:text-white">Contact</a>
+        <button onclick="toggleTheme()" class="bg-gray-700 px-3 py-1 rounded">🌓</button>
+      </nav>
+    </header>
+    <main class="flex flex-col items-center justify-center min-h-screen text-center px-4">
+      <h2 class="text-4xl font-bold mb-2">Hey, I am Willi.</h2>
+      <p class="text-xl text-gray-400 mb-6">Student, programmer, and aspiring neuroscientist</p>
+      <div class="mb-6">
+        <iframe src="https://lanyard-profile-readme.vercel.app/api/286882831282733056?theme=dark&animated=true&hideDiscrim=true&borderRadius=15px&idleMessage=Offline" height="150" frameborder="0"></iframe>
+      </div>
+      <div class="flex space-x-6 mt-6 text-lg">
+        <a href="https://github.com/Wellnevermiind" target="_blank" class="hover:underline">GitHub</a>
+        <span>Discord: nevermiind</span>
+      </div>
+    </main>
+    <footer class="text-center p-6 text-sm text-gray-500">
+      Built with ❤️ using Tailwind CSS
+    </footer>
+  </body>
+</html>
