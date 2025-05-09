@@ -1,61 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Willi | Homepage</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        background-color: #0a0a0a;
-        color: white;
-        font-family: 'Inter', sans-serif;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Willi | Homepage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #0a0a0a;
+      color: white;
+      font-family: 'Inter', sans-serif;
+    }
 
-      .gradient-text {
-        background: linear-gradient(270deg, #60a5fa, #1e3a8a);
-        background-size: 400% 400%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: gradientShift 5s ease infinite;
-      }
+    .gradient-text {
+      background: linear-gradient(270deg, #60a5fa, #1e3a8a);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 5s ease infinite;
+    }
 
-      @keyframes gradientShift {
-        0% {background-position: 0% 50%;}
-        50% {background-position: 100% 50%;}
-        100% {background-position: 0% 50%;}
-      }
+    @keyframes gradientShift {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+  </style>
+</head>
+<body>
+  <div class="h-screen w-screen flex flex-col items-center justify-center text-center p-6 space-y-8">
+    <header class="absolute top-6 right-6 flex gap-6 text-sm text-gray-400">
+      <a href="about.html" class="hover:text-white">About Me</a>
+      <a href="contact.html" class="hover:text-white">Contact</a>
+    </header>
+    <h1 class="text-4xl font-extrabold">
+      <span class="text-gray-100">Hey, I am</span> <span class="gradient-text">Willi</span>.
+    </h1>
+    <p class="text-lg text-gray-400">Student, programmer, and aspiring neuroscientist.</p>
 
-      body {
-        font-family: 'Inter', sans-serif;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="h-screen w-screen flex flex-col items-center justify-center text-center p-6 space-y-8">
-      <header class="absolute top-6 right-6 flex gap-6 text-sm text-gray-400">
-        <a href="about.html" class="hover:text-white">About Me</a>
-        <a href="contact.html" class="hover:text-white">Contact</a>
-      </header>
-      <h1 class="text-4xl font-extrabold">
-        <span class="text-gray-100">Hey, I am</span> <span class="gradient-text">Willi</span>.
-      </h1>
-      <p class="text-lg text-gray-400">Student, programmer, and aspiring neuroscientist</p>
-      <div class="rounded-xl overflow-hidden shadow-lg w-[350px] h-[130px]">
-        <iframe
-  title="Spotify status"
-  src="https://lanyard-profile-readme.vercel.app/api/286882831282733056?theme=dark&animated=true&hideDiscrim=true&borderRadius=15px&idleMessage=Offline"
-  width="100%" height="100%">
-</iframe>
-      </div>
-      <div class="flex space-x-10 text-lg">
-        <a href="https://github.com/Wellnevermiind" target="_blank" class="hover:underline">GitHub</a>
-        <a href="https://discordapp.com/users/286882831282733056" target="_blank" class="hover:underline">Discord</a>
-      </div>
+    <div id="spotify-widget" class="w-full max-w-md mx-auto" title="Spotify Widget"></div>
+
+    <div class="flex space-x-10 text-lg">
+      <a href="https://github.com/Wellnevermiind" target="_blank" class="hover:underline">GitHub</a>
+      <a href="https://discordapp.com/users/286882831282733056" target="_blank" class="hover:underline">Discord</a>
     </div>
-  </body>
+  </div>
+
+  <script>
+    async function loadSpotify() {
+      try {
+        const res = await fetch("https://api.lanyard.rest/v1/users/286882831282733056");
+        const data = await res.json();
+        const container = document.getElementById("spotify-widget");
+
+        if (data.success && data.data.listening_to_spotify) {
+          const track = data.data.spotify;
+          const progress = (Date.now() - track.timestamps.start) / (track.timestamps.end - track.timestamps.start) * 100;
+
+          container.innerHTML = `
+            <div class="bg-[#121212] p-4 rounded-xl shadow-lg flex items-center space-x-4 text-left">
+              <img src="${track.album_art_url}" alt="Album Art" class="w-16 h-16 rounded-md">
+              <div class="flex-1">
+                <div class="text-white font-semibold">${track.song}</div>
+                <div class="text-gray-400 text-sm">${track.artist}</div>
+                <div class="w-full bg-gray-700 h-1 rounded mt-2">
+                  <div class="bg-green-500 h-1 rounded" style="width: ${progress.toFixed(1)}%"></div>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          container.innerHTML = '<p class="text-gray-500">Not listening to Spotify right now.</p>';
+        }
+      } catch (e) {
+        document.getElementById("spotify-widget").innerHTML =
+          '<p class="text-red-500">Error loading Spotify status.</p>';
+        console.error("Failed to load Spotify info:", e);
+      }
+    }
+    loadSpotify();
+  </script>
+</body>
 </html>
