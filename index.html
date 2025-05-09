@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Willi | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <title>Willi | Homepage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
       .gradient-text {
@@ -14,16 +14,17 @@
         -webkit-text-fill-color: transparent;
         animation: gradientShift 5s ease infinite;
       }
+
       @keyframes gradientShift {
         0% {background-position: 0% 50%;}
         50% {background-position: 100% 50%;}
         100% {background-position: 0% 50%;}
       }
-    
-  body {
-    font-family: 'Inter', sans-serif;
-  }
-</style>
+
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+    </style>
   </head>
   <body class="bg-[#0a0a0a] text-white">
     <div class="h-screen w-screen flex flex-col items-center justify-center text-center p-6 space-y-8">
@@ -31,11 +32,11 @@
         <a href="about.html" class="hover:text-white">About Me</a>
         <a href="contact.html" class="hover:text-white">Contact</a>
       </header>
-      <h1 class="text-4xl font-extrabold gradient-text">Hey, I am <span class="gradient-text">Willi</span>.</h1>
+      <h1 class="text-4xl font-extrabold">Hey, I am <span class="gradient-text">Willi</span>.</h1>
       <p class="text-lg text-gray-400">Student, programmer, and aspiring neuroscientist</p>
-      <div>
-        <div class="rounded-xl overflow-hidden shadow-lg w-[350px] h-[130px]"><iframe src="https://lanyard-profile-readme.vercel.app/api/286882831282733056?theme=dark&animated=true&hideDiscrim=true&borderRadius=15px&idleMessage=Offline" width="100%" height="100%" frameborder="0"></iframe></div></div><!--iframe
-                width="350" height="130" frameborder="0"></iframe></div>
+      <div class="rounded-xl overflow-hidden shadow-lg w-[350px] h-[130px]">
+        <iframe src="https://lanyard-profile-readme.vercel.app/api/286882831282733056?theme=dark&animated=true&hideDiscrim=true&borderRadius=15px&idleMessage=Offline"
+                width="100%" height="100%" frameborder="0"></iframe>
       </div>
       <div class="flex space-x-10 text-lg">
         <a href="https://github.com/Wellnevermiind" target="_blank" class="hover:underline">GitHub</a>
