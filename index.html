@@ -121,9 +121,13 @@
 
     <div id="spotify-widget" class="w-full max-w-md mx-auto relative z-10 fade-in-up fade-delay-3" title="Spotify Widget"></div>
 
-    <div class="flex space-x-10 text-lg fade-in-up fade-delay-4">
-      <a href="https://github.com/Wellnevermiind" target="_blank" class="hover:underline">GitHub</a>
-      <a href="https://discordapp.com/users/286882831282733056" target="_blank" class="hover:underline">Discord</a>
+    <div class="flex space-x-6 text-lg fade-in-up fade-delay-4">
+      <a href="https://github.com/Wellnevermiind" target="_blank" title="GitHub">
+        <img src="images/icons/github.svg" alt="GitHub" class="w-6 h-6 hover:scale-110 transition-transform duration-300">
+      </a>
+      <a href="https://discordapp.com/users/286882831282733056" target="_blank" title="Discord">
+        <img src="images/icons/discord.svg" alt="Discord" class="w-6 h-6 hover:scale-110 transition-transform duration-300">
+      </a>
     </div>
   </div>
 
@@ -151,13 +155,11 @@
                     <div class="bg-green-500 h-1 rounded transition-all duration-500 ease-in-out" style="width: ${progress.toFixed(1)}%"></div>
                   </div>
                 </div>
-
-                <!-- Hover Info Box -->
-                <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 w-72 bg-black text-white text-sm rounded-lg shadow-xl p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-20">
-                  <div class="text-lg font-bold mb-1">${track.song}</div>
-                  <div class="text-gray-300">Composer(s): ${track.artist}</div>
-                  <div class="text-gray-500 text-sm">Album: ${track.album}</div>
-                </div>
+              </div>
+              <div class="mt-2 bg-[#181818] text-white text-sm rounded-lg shadow-xl p-4 w-full transition-opacity duration-300 z-20">
+                <div class="text-lg font-bold mb-1">${track.song}</div>
+                <div class="text-gray-300">Composer(s): ${track.artist}</div>
+                <div class="text-gray-400 text-sm">Album: ${track.album}</div>
               </div>
             `;
             lastTrackId = track.track_id;
