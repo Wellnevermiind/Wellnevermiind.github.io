@@ -25,10 +25,22 @@
     transform: translateY(20px);
     animation: fadeInUp 0.8s ease-out forwards;
     }
+    .fade-delay-1 {
+    animation-delay: 0.2s;
+    }
+    .fade-delay-2 {
+    animation-delay: 0.4s;
+    }
+    .fade-delay-3 {
+    animation-delay: 0.6s;
+    }
+    .fade-delay-4 {
+    animation-delay: 0.8s;
+    }
     @keyframes fadeInUp {
       to {
-      opacity: 1;
-      transform: translateY(0);
+        opacity: 1;
+        transform: translateY(0);
       }
     }
     .gradient-text {
@@ -94,22 +106,22 @@
 </head>
 <body>
   <div class="h-screen w-screen flex flex-col items-center justify-center text-center p-6 space-y-8">
-    <header class="absolute top-6 right-6 flex gap-6 text-lg text-gray-400 font-semibold">
+    <header class="absolute top-6 right-6 flex gap-6 text-lg text-gray-400 font-semibold fade-in-up fade-delay-1">
       <a href="about.html" class="hover:text-white">About Me</a>
       <a href="contact.html" class="hover:text-white">Contact</a>
     </header>
   
-    <div class="flex flex-col items-center space-y-2 -mt-8 fade-in-up">
-      <div class="text-sm text-gray-400">Hi, I am</div>
+    <div class="flex flex-col items-center space-y-2 -mt-8 fade-in-up fade-delay-2">
+      <div class="text-sm text-gray-400">Hey, I am</div>
       <div class="text-5xl sm:text-6xl font-extrabold gradient-text">Willi</div>
       <div class="text-white text-xl font-medium tracking-wide glow-text">
         Student, programmer, and aspiring neuroscientist.
       </div>
     </div>
 
-    <div id="spotify-widget" class="w-full max-w-md mx-auto relative z-10 fade-in-up" title="Spotify Widget"></div>
+    <div id="spotify-widget" class="w-full max-w-md mx-auto relative z-10 fade-in-up fade-delay-3" title="Spotify Widget"></div>
 
-    <div class="flex space-x-10 text-lg fade-in-up">
+    <div class="flex space-x-10 text-lg fade-in-up fade-delay-4">
       <a href="https://github.com/Wellnevermiind" target="_blank" class="hover:underline">GitHub</a>
       <a href="https://discordapp.com/users/286882831282733056" target="_blank" class="hover:underline">Discord</a>
     </div>
