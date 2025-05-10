@@ -11,6 +11,10 @@
 .Trashes
 Icon?
 
+# Don't ingore the icons
+!images/icons/
+!images/icons/*.svg
+
 # GitHub Pages build artifacts (if you ever use Jekyll/GitHub Actions)
 _site/
 .jekyll-cache/
