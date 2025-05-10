@@ -1,0 +1,42 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# macOS metadata files
+.Spotlight-V100
+.Trashes
+Icon?
+
+# GitHub Pages build artifacts (if you ever use Jekyll/GitHub Actions)
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Node.js (if using Tailwind CLI or any npm toolchain)
+node_modules/
+dist/
+build/
+package-lock.json
+
+# Tailwind temp files
+*.tmp
+*.log
+
+# VS Code
+.vscode/
+
+# Optional cache files
+.cache/
+*.log
+*.env
+
+# Favicon or manifest builds (optional)
+manifest.webmanifest
+site.webmanifest
+
+# Custom domains (keep CNAME, but prevent others)
+# !CNAME
