@@ -40,8 +40,13 @@
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
     }
     h1:hover, h2:hover, h3:hover, p:hover, a:hover, span:hover {
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-      transition: text-shadow 0.3s ease;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    transition: text-shadow 0.3s ease;
+    }
+    p:hover, li:hover, span:hover {
+    color: #e0e0e0;
+    transform: translateY(-1px);
+    transition: color 0.3s ease, transform 0.3s ease;
     }
     a {
       position: relative;

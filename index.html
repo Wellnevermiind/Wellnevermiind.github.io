@@ -20,6 +20,7 @@
       color: white;
       font-family: 'Inter', sans-serif;
     }
+  
     .gradient-text {
       background: linear-gradient(270deg, #60a5fa, #1e3a8a, #60a5fa);
       background-size: 600% 600%;
@@ -27,30 +28,43 @@
       -webkit-text-fill-color: transparent;
       animation: gradientShift 3s linear infinite;
     }
+  
     @keyframes gradientShift {
       0% {background-position: 0% 50%;}
       50% {background-position: 100% 50%;}
       100% {background-position: 0% 50%;}
     }
+  
     .glow-text {
       text-shadow: 0 0 8px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.2);
     }
+  
     .fade-in {
       opacity: 0;
       animation: fadeIn 1.5s ease-in-out forwards;
     }
+  
     @keyframes fadeIn {
       to {
         opacity: 1;
       }
     }
-    h1:hover, h2:hover, h3:hover, p:hover, a:hover, span:hover {
+  
+    h1:hover, h2:hover, h3:hover {
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
       transition: text-shadow 0.3s ease;
     }
+  
+    p:hover, li:hover, span:hover {
+      color: #e0e0e0;
+      transform: translateY(-1px);
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+  
     a {
       position: relative;
     }
+  
     a::after {
       content: "";
       position: absolute;
@@ -62,10 +76,11 @@
       opacity: 0;
       transition: opacity 0.3s ease;
     }
+  
     a:hover::after {
       opacity: 1;
     }
-  </style>
+</style>  
 </head>
 <body>
   <div class="h-screen w-screen flex flex-col items-center justify-center text-center p-6 space-y-8">
