@@ -3,27 +3,66 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact Willi</title>
+  <title>Contact | Willi</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      height: 100%;
       background-color: #0a0a0a;
       color: white;
       font-family: 'Inter', sans-serif;
+      height: 100%;
+    }
+    .glow {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.2), 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .profile-pic:hover {
+      transform: scale(1.05);
+      transition: transform 0.3s ease;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
     }
   </style>
 </head>
 <body>
-  <div class="h-screen w-screen flex items-center justify-center text-center p-6">
-    <div>
-      <a href="index.html" class="text-blue-400 underline text-sm block mb-4">← Back to Home</a>
-      <h1 class="text-3xl font-bold mb-4">Contact</h1>
-      <p class="text-lg text-gray-400">You can reach out on <a href="https://discordapp.com/users/286882831282733056" class="underline text-blue-400" target="_blank">Discord</a> or check out my <a href="https://github.com/Wellnevermiind" class="underline text-blue-400" target="_blank">GitHub</a>.</p>
+  <header class="text-right p-6 text-lg text-gray-400">
+    <a href="index.html" class="hover:text-white font-semibold">Back to Home</a>
+  </header>
+
+  <main class="flex flex-col items-center justify-start pt-20 text-center fade-in">
+    <img src="images/profile.jpg" alt="Profile Picture" class="w-40 h-40 rounded-full shadow-lg mb-6 profile-pic" />
+    <h1 class="text-3xl font-bold glow mb-2">Get in Touch</h1>
+    <p class="text-gray-300 text-lg mb-4">Feel free to reach out to me via any of the platforms below.</p>
+    <div class="space-x-6 text-lg mb-4">
+      <a href="https://github.com/Wellnevermiind" target="_blank" class="hover:underline">GitHub</a>
+      <a href="https://discordapp.com/users/286882831282733056" target="_blank" class="hover:underline">Discord</a>
     </div>
-  </div>
+    <button onclick="copyDiscordID()" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+      Copy Discord ID
+    </button>
+    <p id="copy-feedback" class="text-sm text-green-400 mt-2 hidden">Copied to clipboard!</p>
+  </main>
+
+  <script>
+    function copyDiscordID() {
+      navigator.clipboard.writeText("286882831282733056").then(() => {
+        const feedback = document.getElementById("copy-feedback");
+        feedback.classList.remove("hidden");
+        setTimeout(() => feedback.classList.add("hidden"), 2000);
+      });
+    }
+  </script>
 </body>
 </html>
