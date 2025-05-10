@@ -33,6 +33,17 @@
     .glow-text {
       text-shadow: 0 0 8px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.2);
     }
+
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.5s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 <body>
@@ -42,7 +53,6 @@
       <a href="contact.html" class="hover:text-white">Contact</a>
     </header>
 
-    <!-- New heading layout -->
     <div class="flex flex-col items-center space-y-2 -mt-8">
       <div class="text-sm text-gray-400">Hi, I am</div>
       <div class="text-5xl sm:text-6xl font-extrabold gradient-text">Willi</div>
@@ -60,6 +70,8 @@
   </div>
 
   <script>
+    let lastTrackId = null;
+
     async function loadSpotify() {
       try {
         const res = await fetch("https://api.lanyard.rest/v1/users/286882831282733056");
@@ -70,20 +82,30 @@
           const track = data.data.spotify;
           const progress = (Date.now() - track.timestamps.start) / (track.timestamps.end - track.timestamps.start) * 100;
 
-          container.innerHTML = `
-            <div class="bg-[#121212] p-4 rounded-xl shadow-lg flex items-center space-x-4 text-left">
-              <img src="${track.album_art_url}" alt="Album Art" class="w-16 h-16 rounded-md">
-              <div class="flex-1">
-                <div class="text-white font-semibold">${track.song}</div>
-                <div class="text-gray-400 text-sm">${track.artist}</div>
-                <div class="w-full bg-gray-700 h-1 rounded mt-2">
-                  <div class="bg-green-500 h-1 rounded" style="width: ${progress.toFixed(1)}%"></div>
+          if (track.track_id !== lastTrackId) {
+            container.innerHTML = `
+              <div class="fade-in bg-[#121212] p-4 rounded-xl shadow-lg flex items-center space-x-4 text-left">
+                <img src="${track.album_art_url}" alt="Album Art" class="w-16 h-16 rounded-md">
+                <div class="flex-1">
+                  <div class="text-white font-semibold">${track.song}</div>
+                  <div class="text-gray-400 text-sm">${track.artist}</div>
+                  <div class="w-full bg-gray-700 h-1 rounded mt-2">
+                    <div class="bg-green-500 h-1 rounded transition-all duration-500 ease-in-out" style="width: ${progress.toFixed(1)}%"></div>
+                  </div>
                 </div>
               </div>
-            </div>
-          `;
+            `;
+            lastTrackId = track.track_id;
+          } else {
+            // Just update the progress bar smoothly
+            const bar = container.querySelector(".bg-green-500");
+            if (bar) {
+              bar.style.width = `${progress.toFixed(1)}%`;
+            }
+          }
         } else {
           container.innerHTML = '<p class="text-gray-500">Not listening to Spotify right now.</p>';
+          lastTrackId = null;
         }
       } catch (e) {
         document.getElementById("spotify-widget").innerHTML =
@@ -91,7 +113,9 @@
         console.error("Failed to load Spotify info:", e);
       }
     }
+
     loadSpotify();
+    setInterval(loadSpotify, 5000);
   </script>
 </body>
 </html>
